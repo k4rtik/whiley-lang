@@ -27,8 +27,6 @@ Currently, there is no segregation of keywords into `control` vs `other` keyword
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
 Initial release of the extension based on [WhileyEmacsMode](https://github.com/Whiley/WhileyEmacsMode).
