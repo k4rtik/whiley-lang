@@ -2,7 +2,11 @@
     "name": "whiley-lang",
     "displayName": "Whiley Lang",
     "description": "Syntax highlighting for Whiley programming language",
-    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/k4rtik/whiley-lang"
+    },
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.66.0"
     },
