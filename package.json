@@ -2,6 +2,7 @@
     "name": "whiley-lang",
     "displayName": "Whiley Lang",
     "description": "Syntax highlighting for Whiley programming language",
+    "publisher": "k4rtik",
     "repository": {
         "type": "git",
         "url": "https://github.com/k4rtik/whiley-lang"
