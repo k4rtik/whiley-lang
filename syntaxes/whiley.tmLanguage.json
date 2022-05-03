@@ -1,0 +1,50 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Whiley",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"comments": {
+      "patterns": [{
+          "name": "comment.line.double-slash",
+          "match": "\\/\\/.*$"
+        }]
+    },
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.other.whiley",
+				"match": "\\b(native|unsafe|export|extern|final|null|return|if|is|throw|throws|try|catch|switch|case|default|break|continue|skip|do|while|for|else|define|assume|assert|assume|package|import|function|method|type|constant|from|with|debug|where|ensures|requires|old|public|protected|private|this|str|new|in|no|some|all|false|true|property|template|variant)\\b"
+			}]
+		},
+		"types": {
+			"patterns": [{
+				"name": "storage.type.whiley",
+				"match": "\\b(real|int|bool|void|void|ref)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.whiley",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.whiley",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.whiley"
+}

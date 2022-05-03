@@ -1,0 +1,25 @@
+{
+    "name": "whiley-lang",
+    "displayName": "Whiley Lang",
+    "description": "Syntax highlighting for Whiley programming language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.66.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "whiley",
+            "aliases": ["Whiley", "whiley"],
+            "extensions": [".whiley"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "whiley",
+            "scopeName": "source.whiley",
+            "path": "./syntaxes/whiley.tmLanguage.json"
+        }]
+    }
+}
