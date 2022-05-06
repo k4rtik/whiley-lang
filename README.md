@@ -4,28 +4,14 @@
 
 
 ## Features
+
 - Syntax Highlighting
 
-<!-- ## Requirements -->
-
-<!-- If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
-
-<!-- ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something -->
-
-## Known Issues
-
-Currently, there is no segregation of keywords into `control` vs `other` keywords.
-
 ## Release Notes
+
+### 1.1.0
+
+Switched to `tmLanguage` from Whiley's [textmate plugin](https://github.com/Whiley/WhileySyntaxBundle) for fine-grained syntax highlighting.
 
 ### 1.0.0
 
@@ -33,8 +19,4 @@ Initial release of the extension based on [WhileyEmacsMode](https://github.com/W
 
 <!-- ### 1.0.1
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z. -->
+Fixed issue #. -->
