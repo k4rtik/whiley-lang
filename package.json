@@ -20,7 +20,11 @@
             "id": "whiley",
             "aliases": ["Whiley", "whiley"],
             "extensions": [".whiley"],
-            "configuration": "./language-configuration.json"
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./icons/whiley-light.svg",
+                "dark": "./icons/whiley-dark.svg"
+            }
         }],
         "grammars": [{
             "language": "whiley",
