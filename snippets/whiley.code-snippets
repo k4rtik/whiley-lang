@@ -1,0 +1,121 @@
+{
+    "Type Declaration": {
+        "prefix": "type",
+        "body": [
+            "type ${1:name}<T> is ${2:value}"
+        ],
+        "description": "While Statement"
+    },
+    "Type Block Declaration": {
+        "prefix": "typeblock",
+        "body": [
+            "type ${1:name}<T> is {",
+            "\t$0",
+            "}"
+        ],
+        "description": "While Statement"
+    },
+    "Function Declaration": {
+        "prefix": "function",
+        "body": [
+            "function ${1:name}() -> ${2}:",
+            "\t$TM_SELECTED_TEXT$0"
+        ],
+        "description": "Function Declaration"
+    },
+    "Method Declaration": {
+        "prefix": "method",
+        "body": [
+            "method ${1:name}() -> ${2}:",
+            "\t$TM_SELECTED_TEXT$0"
+        ],
+        "description": "Method Declaration"
+    },
+    "Property Declaration": {
+        "prefix": "property",
+        "body": [
+            "property ${1:name}() -> ${2}:",
+            "\treturn $TM_SELECTED_TEXT$0"
+        ],
+        "description": "Function Declaration"
+    },
+    "Package Declaration": {
+        "prefix": "package",
+        "body": [
+            "package ${0:package}"
+        ],
+        "description": "Package Declaration"
+    },
+    "Import Declaration": {
+        "prefix": "import",
+        "body": [
+            "import $0 from ${1:package}"
+        ],
+        "description": "Import package entities"
+    },
+    "For Loop": {
+        "prefix": "for",
+        "body": [
+            "for ${1:i} in 0..${2:length}:",
+            "\t$TM_SELECTED_TEXT$0"
+        ],
+        "description": "For Loop"
+    },
+    "If Statement": {
+        "prefix": "if",
+        "body": [
+            "if ${1:condition}:",
+            "\t$TM_SELECTED_TEXT$0"
+        ],
+        "description": "If Statement"
+    },
+    "If-Else Statement": {
+        "prefix": "ifelse",
+        "body": [
+            "if ${1:condition}:",
+            "\t$TM_SELECTED_TEXT$0",
+            "else:",
+            "\t"
+        ],
+        "description": "If-Else Statement"
+    },
+    "Switch Statement": {
+        "prefix": "switch",
+        "body": [
+            "switch ${1:key}:",
+            "\tcase ${2:value}:",
+            "\t\t$0",
+            "\t\tbreak",
+            "",
+            "\tdefault:",
+            "\t\tbreak"
+        ],
+        "description": "Switch Statement"
+    },
+    "Case Statement": {
+        "prefix": "case",
+        "body": [
+            "case ${1:value}:",
+            "\t$0",
+            "\tbreak"
+        ],
+        "description": "case ... break"
+    },
+    "While Statement": {
+        "prefix": "while",
+        "body": [
+            "while ${1:condition}:",
+            "\t$TM_SELECTED_TEXT$0"
+        ],
+        "description": "While Statement"
+    },
+    "Do-While Statement": {
+        "prefix": "dowhile",
+        "body": [
+            "do:",
+            "\t$TM_SELECTED_TEXT$0",
+            "while ${1:condition}"
+        ],
+        "description": "Do-While Statement"
+    }
+}

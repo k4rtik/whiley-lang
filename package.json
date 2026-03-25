@@ -30,6 +30,10 @@
             "language": "whiley",
             "scopeName": "source.whiley",
             "path": "./syntaxes/whiley.tmLanguage.json"
+        }],
+        "snippets": [{
+            "language": "whiley",
+            "path": "./snippets/whiley.code-snippets"
         }]
     }
 }
