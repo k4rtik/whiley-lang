@@ -6,8 +6,14 @@
 ## Features
 
 - Syntax Highlighting
+- Code Snippets
+- File icons to `.whiley` files
 
 ## Release Notes
+
+### 1.2.0
+
+Improved syntax highlight, added code snippets for several statements and added file icon to `.whiley` files.
 
 ### 1.1.0
 
