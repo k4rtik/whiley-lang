@@ -7,32 +7,22 @@
             "include": "#comments"
         },
         {
-            "include": "#functions"
+            "include": "#package-declaration"
         },
         {
-            "name": "meta.type.whiley",
-            "match": "\\b(type)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
-            "captures": {
-                "1": {
-                    "name": "keyword.other.type.whiley"
-                },
-                "2": {
-                    "name": "entity.name.type.whiley"
-                }
-            }
+            "include": "#import-declaration"
         },
         {
-            "include": "#import"
+            "include": "#function-declaration"
+        },
+        {
+            "include": "#type-declaration"
         },
         {
             "include": "#keywords"
         },
         {
             "include": "#function-call"
-        },
-        {
-            "match": "^package\\b",
-            "name": "keyword.other.package.whiley"
         },
         {
             "include": "#constants"
@@ -44,14 +34,13 @@
             "include": "#namespaces"
         },
         {
-            "include": "#punctuations"
+            "include": "#punctuation"
         },
         {
             "include": "#strings"
         },
         {
-            "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
-            "name": "variable.other.whiley"
+            "include": "#variables"
         }
     ],
     "repository": {
@@ -100,10 +89,6 @@
                 {
                     "name": "constant.language.bool.whiley",
                     "match": "\\b(true|false)\\b"
-                },
-                {
-                    "name": "constant.language.null.whiley",
-                    "match": "\\b(null)\\b"
                 }
             ]
         },
@@ -134,19 +119,34 @@
             "name": "constant.character.escape.whiley",
             "match": "\\\\."
         },
-        "functions": {
+        "expression": {
             "patterns": [
                 {
-                    "name": "meta.function.whiley",
-                    "match": "\\b(function|method|property|variant)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.other.function.whiley"
-                        },
-                        "2": {
-                            "name": "entity.name.function.whiley"
-                        }
-                    }
+                    "include": "#comments"
+                },
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#function-call"
+                },
+                {
+                    "include": "#constants"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#namespaces"
+                },
+                {
+                    "include": "#punctuation"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#variables"
                 }
             ]
         },
@@ -160,55 +160,180 @@
                             "name": "entity.name.function.whiley"
                         }
                     }
+                },
+                {
+                    "name": "meta.function-call.whiley",
+                    "begin": "(?=([a-zA-Z_][a-zA-Z0-9_]*)\\s*(<(([a-zA-Z0-9_]*|[,])*)>)\\s*\\()",
+                    "end": "(?<=\\))",
+                    "patterns": [
+                        {
+                            "name": "entity.name.function.whiley",
+                            "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*<)"
+                        },
+                        {
+                            "include": "#type-angles"
+                        },
+                        {
+                            "begin": "\\(",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.brackets.round.whiley"
+                                }
+                            },
+                            "end": "\\)",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.brackets.round.whiley"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "include": "#expression"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
-        "import": {
+        "function-declaration": {
+            "name": "meta.function.whiley",
+            "begin": "\\b(function|method|property|variant)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.${1:/downcase}.whiley"
+                },
+                "2": {
+                    "name": "entity.name.function.whiley"
+                }
+            },
+            "end": "(:|(?=^\\s*(?=\\n)))",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.function.begin.whiley"
+                }
+            },
             "patterns": [
                 {
-                    "match": "^(import)\\s*([a-zA-Z0-9:]+)\\s*(with)\\s*([a-zA-Z_0-9]+)",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.other.import.whiley"
-                        },
-                        "2": {
-                            "name": "variable.whiley"
-                        },
-                        "3": {
-                            "name": "keyword.other.import.with.whiley"
-                        },
-                        "4": {
-                            "name": "variable.whiley"
-                        }
-                    }
+                    "include": "#type-angles"
                 },
                 {
-                    "match": "^(import)\\s*([a-zA-Z0-9_]+)\\s*(from)\\s*([a-zA-Z0-9:]+)",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.other.import.whiley"
-                        },
-                        "2": {
-                            "name": "variable.whiley"
-                        },
-                        "3": {
-                            "name": "keyword.other.import.from.whiley"
-                        },
-                        "4": {
-                            "name": "variable.whiley"
-                        }
-                    }
+                    "include": "#function-parameters"
                 },
                 {
-                    "match": "^(import)\\s*([a-zA-Z0-9:]+)",
-                    "captures": {
+                    "include": "#function-return-type"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "name": "meta.ensures-requires.whiley",
+                    "begin": "\\b(ensures|requires)\\s+(?=\\S)",
+                    "beginCaptures": {
                         "1": {
-                            "name": "keyword.other.import.whiley"
-                        },
-                        "2": {
-                            "name": "variable.whiley"
+                            "name": "keyword.control.${1:/downcase}.whiley"
                         }
-                    }
+                    },
+                    "end": "(?=:|$|\\n)",
+                    "patterns": [
+                        {
+                            "include": "#expression"
+                        }
+                    ]
+                }
+            ]
+        },
+        "function-parameters": {
+            "name": "meta.function-parameters.whiley",
+            "begin": "\\(",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.parameters.begin.whiley"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.parameters.end.whiley"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#type-function"
+                },
+                {
+                    "include": "#constants"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#namespaces"
+                },
+                {
+                    "include": "#punctuation"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#variables"
+                }
+            ]
+        },
+        "function-return-type": {
+            "begin": "\\s*(->)\\s*",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.operator.return-type.whiley"
+                }
+            },
+            "end": "(?<=\\))|(?=[:,]|\\s)",
+            "patterns": [
+                {
+                    "include": "#type-paren"
+                },
+                {
+                    "include": "#types"
+                }
+            ]
+        },
+        "import-declaration": {
+            "name": "meta.import.whiley",
+            "begin": "^(import)\\s+(?=[a-zA-Z_0-9]+)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.import.whiley"
+                }
+            },
+            "end": "(?=$|\\n)",
+            "patterns": [
+                {
+                    "include": "#namespaces"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#punctuation-comma"
+                },
+                {
+                    "name": "keyword.other.import.from.whiley",
+                    "match": "\\b(from)\\b"
+                },
+                {
+                    "name": "keyword.other.import.with.whiley",
+                    "match": "\\b(with)\\b"
+                },
+                {
+                    "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+                    "name": "variable.other.whiley"
+                },
+                {
+                    "include": "#comments"
                 }
             ]
         },
@@ -224,7 +349,36 @@
                 },
                 {
                     "name": "keyword.other.whiley",
-                    "match": "\\b(bool|byte|export|final|int|native|private|protected|public|unsafe|void)\\b"
+                    "match": "\\b(export|final|native|private|protected|public|unsafe|void)\\b"
+                },
+                {
+                    "begin": "(?=\\|[a-zA-Z0-9_.]+\\|)",
+                    "end": "(?<=\\|)",
+                    "patterns": [
+                        {
+                            "begin": "\\|",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.bar.array-length.whiley"
+                                }
+                            },
+                            "end": "\\|",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.bar.array-length.whiley"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "include": "#variables"
+                                },
+                                {
+                                    "name": "keyword.operator.access.dot.whiley",
+                                    "match": "\\.(?!\\.)"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "name": "keyword.operator.logical.whiley",
@@ -235,6 +389,10 @@
                     "match": "(&(?!&)|\\|(?!\\|))"
                 },
                 {
+                    "name": "keyword.operator.borrow.and.whiley",
+                    "match": "&(?!&)"
+                },
+                {
                     "name": "keyword.operator.assignment.equal.whiley",
                     "match": "(?<![<>])=(?!=|>)"
                 },
@@ -243,17 +401,16 @@
                     "match": "(<=|<|>=|>|==|!=|[+%]|(-(?!>))|\\*|/)"
                 },
                 {
+                    "name": "keyword.operator.namespace.whiley",
+                    "match": "::"
+                },
+                {
                     "name": "keyword.operator.access.dot.whiley",
                     "match": "\\.(?!\\.)"
                 },
                 {
-                    "comment": "ranges, range patterns",
                     "name": "keyword.operator.range.whiley",
                     "match": "\\.{2}(?!\\.)"
-                },
-                {
-                    "name": "keyword.operator.open-record.whiley",
-                    "match": "\\.{3}(?!\\.)"
                 },
                 {
                     "name": "keyword.operator.arrow.whiley",
@@ -277,7 +434,32 @@
                 }
             ]
         },
-        "punctuations": {
+        "package-declaration": {
+            "name": "meta.package.whiley",
+            "begin": "^(package)\\s+(?=[a-zA-Z_0-9]+)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.package.whiley"
+                }
+            },
+            "end": "(?=$|\\n)",
+            "patterns": [
+                {
+                    "include": "#namespaces"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+                    "name": "variable.other.whiley"
+                },
+                {
+                    "include": "#comments"
+                }
+            ]
+        },
+        "punctuation": {
             "patterns": [
                 {
                     "name": "punctuation.comma.whiley",
@@ -304,6 +486,10 @@
                     "match": "[\\[\\]]"
                 }
             ]
+        },
+        "punctuation-comma": {
+            "name": "punctuation.comma.whiley",
+            "match": ","
         },
         "strings": {
             "patterns": [
@@ -351,6 +537,53 @@
                 }
             ]
         },
+        "type-declaration": {
+            "name": "meta.type.whiley",
+            "begin": "\\b(type)\\s+([a-zA-Z_][a-zA-Z0-9_]*)(?![a-zA-Z0-9_])",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.type.whiley"
+                },
+                "2": {
+                    "name": "entity.name.type.whiley"
+                }
+            },
+            "end": "(?=^\\s*(?!//|/\\*|where))",
+            "patterns": [
+                {
+                    "include": "#type-angles"
+                },
+                {
+                    "begin": "\\b(is)\\s+",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.operator.word.is.whiley"
+                        }
+                    },
+                    "end": "((?<=\\})|(?=\\s*where)|$)",
+                    "patterns": [
+                        {
+                            "include": "#type-record"
+                        },
+                        {
+                            "include": "#type-paren"
+                        },
+                        {
+                            "include": "#type-function"
+                        },
+                        {
+                            "include": "#types"
+                        }
+                    ]
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#where-clause"
+                }
+            ]
+        },
         "types": {
             "patterns": [
                 {
@@ -362,8 +595,42 @@
                     }
                 },
                 {
+                    "begin": "\\b(_?[A-Z][a-zA-Z0-9_]*)(<)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.type.whiley"
+                        },
+                        "2": {
+                            "name": "punctuation.brackets.angle.whiley"
+                        }
+                    },
+                    "end": ">",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.brackets.angle.whiley"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "include": "#keywords"
+                        },
+                        {
+                            "include": "#punctuation"
+                        },
+                        {
+                            "include": "#types"
+                        },
+                        {
+                            "include": "#variables"
+                        }
+                    ]
+                },
+                {
                     "name": "entity.name.type.primitive.whiley",
-                    "match": "\\b(void|null|bool|byte|int|real|char|letter|uppercase|lowercase|digit|string|rwMode)\\b"
+                    "match": "\\b(void|null|bool|byte|int|real|char|letter|uppercase|lowercase|digit|string|rwMode|integer|uinteger|number)\\b"
                 },
                 {
                     "name": "entity.name.type.whiley",
@@ -372,6 +639,193 @@
                 {
                     "name": "entity.name.type.whiley",
                     "match": "\\b_?[A-Z][a-zA-Z0-9_]*\\b"
+                },
+                {
+                    "name": "punctuation.separator.pipe.whiley",
+                    "match": "\\|(?!\\|)"
+                },
+                {
+                    "begin": "(?<![a-zA-Z0-9_])([a-zA-Z_][a-zA-Z0-9_]*)(<)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.type.whiley"
+                        },
+                        "2": {
+                            "name": "punctuation.brackets.angle.whiley"
+                        }
+                    },
+                    "end": ">",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.brackets.angle.whiley"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "include": "#keywords"
+                        },
+                        {
+                            "include": "#punctuation"
+                        },
+                        {
+                            "include": "#types"
+                        },
+                        {
+                            "include": "#variables"
+                        }
+                    ]
+                }
+            ]
+        },
+        "type-paren": {
+            "name": "meta.paren.type.whiley",
+            "begin": "\\(",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.brackets.round.whiley"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.brackets.round.whiley"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#type-record"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#punctuation-comma"
+                },
+                {
+                    "include": "#variables"
+                }
+            ]
+        },
+        "type-record": {
+            "name": "meta.record.type.whiley",
+            "begin": "(&(?!&))?(\\{)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.operator.borrow.whiley"
+                },
+                "2": {
+                    "name": "punctuation.definition.block.whiley"
+                }
+            },
+            "end": "\\}",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.block.whiley"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#type-function"
+                },
+                {
+                    "include": "#constants"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#namespaces"
+                },
+                {
+                    "include": "#punctuation"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#variables"
+                },
+                {
+                    "name": "keyword.operator.record.whiley",
+                    "match": "\\.{3}(?!\\.)"
+                }
+            ]
+        },
+        "type-angles": {
+            "name": "meta.type-angles.whiley",
+            "begin": "<",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.brackets.angle.whiley"
+                }
+            },
+            "end": ">",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.brackets.angle.whiley"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#types"
+                },
+                {
+                    "include": "#punctuation-comma"
+                }
+            ]
+        },
+        "type-function": {
+            "name": "meta.type-function.whiley",
+            "begin": "\\b(?:(?:(function|method|property|variant)\\s*(?=\\())|(?:(function|method|property|variant)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*))",
+            "beginCaptures": {
+                "1": {
+                    "name": "entity.name.${1:/downcase}.whiley"
+                },
+                "2": {
+                    "name": "keyword.other.${1:/downcase}.whiley"
+                },
+                "3": {
+                    "name": "entity.name.function.whiley"
+                }
+            },
+            "end": "(?<=[}])|(?=\\s*(,|[.]{3}|\\s*(?=\\w)|$))",
+            "patterns": [
+                {
+                    "include": "#type-angles"
+                },
+                {
+                    "include": "#function-parameters"
+                },
+                {
+                    "include": "#function-return-type"
+                }
+            ]
+        },
+        "variables": {
+            "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+            "name": "variable.other.whiley"
+        },
+        "where-clause": {
+            "name": "meta.where.whiley",
+            "begin": "\\b(where)(?!\\.)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.where.whiley"
+                }
+            },
+            "end": "(?=$|:|\\n)",
+            "patterns": [
+                {
+                    "include": "#expression"
                 }
             ]
         }
