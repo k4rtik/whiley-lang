@@ -303,7 +303,7 @@
         },
         "import-declaration": {
             "name": "meta.import.whiley",
-            "begin": "^(import)\\s+(?=[a-zA-Z_0-9]+)",
+            "begin": "^(import)\\s+(?=([a-zA-Z_0-9]+|\\*))",
             "beginCaptures": {
                 "1": {
                     "name": "keyword.other.import.whiley"
@@ -311,6 +311,10 @@
             },
             "end": "(?=$|\\n)",
             "patterns": [
+                {
+                    "name": "keyword.other.import-all.whiley",
+                    "match": "\\*"
+                },
                 {
                     "include": "#namespaces"
                 },
