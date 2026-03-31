@@ -84,11 +84,10 @@
         "body": [
             "switch ${1:key}:",
             "\tcase ${2:value}:",
-            "\t\t$0",
-            "\t\tbreak",
+            "\t\t$0"
             "",
             "\tdefault:",
-            "\t\tbreak"
+            "\t\t$0"
         ],
         "description": "Switch Statement"
     },
@@ -96,8 +95,7 @@
         "prefix": "case",
         "body": [
             "case ${1:value}:",
-            "\t$0",
-            "\tbreak"
+            "\t$0"
         ],
         "description": "case ... break"
     },
