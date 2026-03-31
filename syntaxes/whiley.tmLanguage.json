@@ -389,10 +389,6 @@
                     "match": "(&&|\\|\\||!(?!=)|==>|<==>)"
                 },
                 {
-                    "name": "keyword.operator.logical.whiley",
-                    "match": "(&(?!&)|\\|(?!\\|))"
-                },
-                {
                     "name": "keyword.operator.borrow.and.whiley",
                     "match": "&(?!&)"
                 },

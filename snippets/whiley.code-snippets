@@ -84,7 +84,7 @@
         "body": [
             "switch ${1:key}:",
             "\tcase ${2:value}:",
-            "\t\t$0"
+            "\t\t$0",
             "",
             "\tdefault:",
             "\t\t$0"
