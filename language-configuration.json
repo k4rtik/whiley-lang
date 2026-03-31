@@ -36,7 +36,7 @@
     },
     "onEnterRules": [
         {
-            "beforeText": "^\\s*(?:function|method|property|ensures|requires|for|if|else if|else|do|while|switch|case|where).*?:\\s*$",
+            "beforeText": "^\\s*(?:function|method|property|ensures|requires|for|if|else if|else|do|while|switch|case|default|where).*?:\\s*$",
             "action": {
                 "indent": "indent"
             }
