@@ -8,7 +8,7 @@
         "type": "git",
         "url": "https://github.com/k4rtik/whiley-lang"
     },
-    "version": "1.1.0",
+    "version": "1.2.0",
     "engines": {
         "vscode": "^1.67.0"
     },
@@ -20,12 +20,20 @@
             "id": "whiley",
             "aliases": ["Whiley", "whiley"],
             "extensions": [".whiley"],
-            "configuration": "./language-configuration.json"
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./icons/whiley-light.svg",
+                "dark": "./icons/whiley-dark.svg"
+            }
         }],
         "grammars": [{
             "language": "whiley",
             "scopeName": "source.whiley",
             "path": "./syntaxes/whiley.tmLanguage.json"
+        }],
+        "snippets": [{
+            "language": "whiley",
+            "path": "./snippets/whiley.code-snippets"
         }]
     }
 }

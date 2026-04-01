@@ -3,7 +3,7 @@
         // symbol used for single line comment.
         "lineComment": "//",
         // symbols used for start and end a block comment.
-        "blockComment": [ "/*", "*/" ]
+        "blockComment": ["/*", "*/"]
     },
     // symbols used as brackets
     "brackets": [
@@ -26,5 +26,20 @@
         ["(", ")"],
         ["\"", "\""],
         ["'", "'"]
+    ],
+    "folding": {
+        "offSide": true,
+        "markers": {
+            "start": "^\\s*//\\s*region\\b",
+            "end": "^\\s*//\\s*endregion\\b"
+        }
+    },
+    "onEnterRules": [
+        {
+            "beforeText": "^\\s*(?:function|method|property|ensures|requires|for|if|else if|else|do|while|switch|case|default|where).*?:\\s*$",
+            "action": {
+                "indent": "indent"
+            }
+        }
     ]
 }
